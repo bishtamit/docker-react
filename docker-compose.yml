@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    ports:
+      - 3000:3000
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+  
+  tests:
+    restart: always 
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    
+    command: ["npm", "run", "test"]
+
+  build:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    
+    command: ["npm", "run", "test"]
